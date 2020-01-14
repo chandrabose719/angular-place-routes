@@ -1,0 +1,71 @@
+<div id="home-part">
+	<div class="container">
+		<div class="new-route-creation-block">
+			<h4 class="text-center">{{ title }}</h4>
+			<form name="routeCreation" #routeCreationForm="ngForm" (ngSubmit)="routeCreation()" novalidate>
+				<div class="row">
+					<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label>Starting Point :<span class="text-danger">*</span></label>
+							<input type="text" class="form-control" name="start" [(ngModel)]="routes.start" #startControl="ngModel" required minlength="3" maxlength="3">
+							<div *ngIf="startControl.touched && startControl.invalid">	
+								<small class="text-danger ml-2" *ngIf="startControl.errors.required">Starting point should not be empty!</small>
+								<small class="text-danger ml-2" *ngIf="startControl.errors.minlength">Enter 3 Characters only!</small>
+								<small class="text-danger ml-2" *ngIf="startControl.errors.maxlength">Enter 3 Characters only!</small>
+							</div>
+						</div>
+					</div>	
+					<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label>Ending Point :<span class="text-danger">*</span></label>
+							<input type="text" class="form-control" name="end" [(ngModel)]="routes.end" #endControl="ngModel" required minlength="3" maxlength="3">
+							<div *ngIf="endControl.touched && endControl.invalid">
+								<small class="text-danger ml-2" *ngIf="endControl.errors.required">Ending point not be empty!</small>
+								<small class="text-danger ml-2" *ngIf="endControl.errors.minlength">Enter 3 Characters only!</small>
+								<small class="text-danger ml-2" *ngIf="endControl.errors.maxlength">Enter 3 Characters only!</small>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<div class="form-group btn-from-grp">
+							<button type="submit" class="form-control btn btn-primary" [disabled]="routeCreationForm.invalid">
+								CREATE
+							</button>
+						</div>
+					</div>	
+				</div>
+			</form>
+		</div>
+		<div class="route-info-block">
+			<div *ngIf="routesArr">
+				<div class="row">
+					<div class="col-12" *ngFor="let route of routesArr">
+						<div *ngIf="route.mid.length > 0">
+							<div class="horizantal-order">
+								<div class="horizantal-order-content active"><span class="arrow right"></span>{{ route.start }}</div>
+								<div *ngFor="let routeMid of route.mid" class="horizantal-order-content active"><span class="arrow right"></span>{{ routeMid }}</div>
+								<div class="horizantal-order-content active">{{ route.end }}</div>
+							</div>
+						</div>
+						<div *ngIf="route.mid.length <= 0">
+							<div class="horizantal-order">
+								<div class="horizantal-order-content active">{{ route.start }}</div>
+								<div class="horizantal-order-content active">{{ route.end }}</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>		
+		</div>					
+	</div>
+</div>
+
+
+
+
+
+<!-- <div class="horizantal-order">
+	<div class="horizantal-order-content active">1</div>
+	<div class="horizantal-order-content">2</div>
+	<div class="horizantal-order-content">3</div>
+</div> -->
